@@ -1,5 +1,6 @@
 # AutomationAccount erstellen
 # https://cmatskas.com/automate-login-for-azure-powershell-scripts/
+
 Login-AzureRmAccount  
 
 Get-AzureRmSubscription
