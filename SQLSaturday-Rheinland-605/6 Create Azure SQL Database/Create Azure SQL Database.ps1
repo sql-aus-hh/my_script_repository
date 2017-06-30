@@ -1,4 +1,5 @@
-clear
+Clear-Host
+
 #
 # Login into Azure and define which Subscription should be used
 #
@@ -24,7 +25,7 @@ $servername = "server-sqldbdemo"
 # The sample database name
 $databasename = "db-sqldbdemo"
 # The ip address range that you want to allow to access your server
-$clientIP = (Invoke-WebRequest ifconfig.me/ip).Content
+$clientIP = Invoke-RestMethod http://ipinfo.io/json | Select -exp ip
 $startip = $clientIP
 $endip = $clientIP
 
@@ -60,11 +61,10 @@ if ($notPresent) {
 # Create a blank database with an S0 performance level
 Get-AzureRmSqlDatabase -ResourceGroupName $resourcegroupname -ServerName $servername -DatabaseName $databasename -ev notPresent -ea 0
 if ($notPresent) {
-    $database = New-AzureRmSqlDatabase  -ResourceGroupName $resourcegroupname `
+    $database = New-AzureRmSqlDatabase -ResourceGroupName $resourcegroupname `
     -ServerName $servername `
     -DatabaseName $databasename `
-    -RequestedServiceObjectiveName "S0" `
-    -SampleName "AdventureWorksLT"
+    -RequestedServiceObjectiveName "S0"
 } else {
     Write-Host "Database" $databasename "already exists"
 }
