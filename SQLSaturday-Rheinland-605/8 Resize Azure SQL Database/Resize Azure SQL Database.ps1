@@ -23,7 +23,7 @@ $servername = "server-sqldbdemo"
 # The sample database name
 $databasename = "db-sqldbdemo"
 # Set new performance-level
-$newdbDTUsize = "S3"
+$newdbDTUsize = "S0"
 
 # Resize Azure SQL Database to new performance-level
 Get-AzureRmSqlDatabase -ResourceGroupName $resourcegroupname -ServerName $servername -DatabaseName $databasename -ev notPresent -ea 0
