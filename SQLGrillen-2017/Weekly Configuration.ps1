@@ -5,9 +5,9 @@
 # https://ruiromanoblog.wordpress.com/2017/05/06/automatically-pauseresume-and-scale-updown-your-azure-analysis-services-using-azurerm-analysisservices/
 #
 
-param(     
-    [string] $resourceGroupName = "SQLGrillen2017",
-    [string] $serverName = "asbeer01",
+param(    
+    [string] $resourceGroupName = "SQLPASS",
+    [string] $serverName = "aaserver01",
     [string] $configStr = "
                             [
                                 {
@@ -34,6 +34,7 @@ param(
                         "
 )
 
+Clear-Host
 $VerbosePreference = "Continue"
 $ErrorActionPreference = "Stop"
 
@@ -41,11 +42,17 @@ Import-Module "AzureRM.AnalysisServices"
 
 Write-Verbose "Logging in to Azure..."
 
-$azureAccountName = "1234567-1234-1234-1234-012345678912"
-$azurePassword = ConvertTo-SecureString "SQLGrillen@2017" -AsPlainText -Force
-$psCred = New-Object System.Management.Automation.PSCredential($azureAccountName, $azurePassword)
+Clear-Host
 
-Add-AzureRmAccount -Credential $psCred -ServicePrincipal -TenantId "1234567-1234-1234-1234-012345678912"
+#
+# Login into Azure and define which Subscription should be used
+#
+$onedrive = (Get-Content Env:\USERPROFILE)+"\Onedrive"
+.$onedrive"\SQL-aus-Hamburg\Demos"\Azure_Automation_Login_MVPSubscription.ps1
+Login
+####
+
+Set-AzureRmContext -SubscriptionId $mySubscriptionID
 
 $stateConfig = $configStr | ConvertFrom-Json
 $startTime = Get-Date
