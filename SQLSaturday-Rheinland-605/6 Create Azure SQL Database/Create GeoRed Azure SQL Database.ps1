@@ -3,12 +3,12 @@ Clear-Host
 #
 # Login into Azure and define which Subscription should be used
 #
-$onedrive = (Get-Content Env:\USERPROFILE)+"\Onedrive"
-.$onedrive"\SQL-aus-Hamburg\Demos"\Azure_Automation_Login_MVPSubscription.ps1
-Login
-####
-
+Login-AzureRmAccount
 Set-AzureRmContext -SubscriptionId $mySubscriptionID
+
+#
+#   Process
+#
 
 # Set the resource group name and location for your primary server
 $primaryresourcegroupname = "myPrimaryResourceGroup-sqlsatdemodb"
