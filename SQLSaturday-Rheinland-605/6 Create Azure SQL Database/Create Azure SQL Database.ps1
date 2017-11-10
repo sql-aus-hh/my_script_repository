@@ -3,17 +3,12 @@ Clear-Host
 #
 # Login into Azure and define which Subscription should be used
 #
-$onedrive = (Get-Content Env:\USERPROFILE)+"\Onedrive"
-.$onedrive"\SQL-aus-Hamburg\Demos"\Azure_Automation_Login_MVPSubscription.ps1
-Login
-####
-
+Login-AzureRmAccount
 Set-AzureRmContext -SubscriptionId $mySubscriptionID
 
 #
 #   Process
 #
-# Login-AzureRmAccount
 # Set the resource group name and location for your server
 $resourcegroupname = "RG-AzureSQLDatabase-Demo"
 $location = "west europe"
